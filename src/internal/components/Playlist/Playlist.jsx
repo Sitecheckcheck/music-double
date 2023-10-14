@@ -42,22 +42,23 @@ export const Playlist = ({ list, status, error, setPlaylist, listName }) => {
     }
 
     setCurrentPlaylist(arrPlaylist);
-  }
+  };
 
   useEffect(() => {
-    filterCheck(list)
+    filterCheck(list);
   }, [list]);
 
   useEffect(() => {
     if (search !== '') {
-      const searchPlaylist = currentPlaylist.filter((item) => {
-        return item.name.toLowerCase().includes(search.toLowerCase());
-      });
+      console.log(111);
+      const searchPlaylist = currentPlaylist.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase()),
+      );
       setCurrentPlaylist(searchPlaylist);
     } else {
-      filterCheck(list)
+      filterCheck(list);
     }
-  }, []);
+  }, [search]);
 
   return (
     <>
@@ -112,7 +113,6 @@ export const Playlist = ({ list, status, error, setPlaylist, listName }) => {
               <PlaylistItem
                 list={currentPlaylist}
                 setPlaylist={setPlaylist}
-                // item={list.filter((x) => x.id === item.id)[0]}
                 item={item}
                 key={item.id}
                 track={item.name}
@@ -123,6 +123,7 @@ export const Playlist = ({ list, status, error, setPlaylist, listName }) => {
                     ? `0${item.duration_in_seconds % 60}`
                     : item.duration_in_seconds % 60
                 }`}
+                listName={listName}
               />
             ))}
           </S.ContentPlaylist>

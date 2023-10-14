@@ -1,6 +1,4 @@
 /* eslint-disable */
-// import tracks from '../../../../Tracks';
-import { useEffect } from 'react';
 import { Filters } from './filterStyle';
 import { useAuthorContext } from '../../../../hooks/authorState';
 import { useGanreContext } from '../../../../hooks/ganreState';

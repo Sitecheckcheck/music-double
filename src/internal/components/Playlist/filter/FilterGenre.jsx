@@ -1,17 +1,11 @@
 /* eslint-disable */
-// import tracks from '../../../../Tracks';
 import { useEffect } from 'react';
 import { Filters } from './filterStyle';
 import { useGanreContext } from '../../../../hooks/ganreState';
 import { useAuthorContext } from '../../../../hooks/authorState';
 import { useDateContext } from '../../../../hooks/dateState';
 
-export const FilterGenre = ({
-  playlist,
-  setCurrentPlaylist,
-  setPlaylist,
-  currentPlaylist,
-}) => {
+export const FilterGenre = ({ playlist, setCurrentPlaylist, setPlaylist }) => {
   const arr = playlist.map((item) => item.genre);
   const arr2 = arr.filter((item, index) => arr.indexOf(item) === index);
 
@@ -45,13 +39,13 @@ export const FilterGenre = ({
           );
 
     if (dateState.includes('Сначала старые')) {
-      const arr = arrPlaylist.filter((x) => x.release_date);
-      arrPlaylist = arr.sort(
+      const arr3 = arrPlaylist.filter((x) => x.release_date);
+      arrPlaylist = arr3.sort(
         (a, b) => parseFloat(a.release_date) - parseFloat(b.release_date),
       );
     } else if (dateState.includes('Сначала новые')) {
-      const arr = arrPlaylist.filter((x) => x.release_date);
-      arrPlaylist = arr.sort(
+      const arr3 = arrPlaylist.filter((x) => x.release_date);
+      arrPlaylist = arr3.sort(
         (a, b) => parseFloat(b.release_date) - parseFloat(a.release_date),
       );
     }

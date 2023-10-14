@@ -47,7 +47,7 @@ const baseQueryWithReauth = async (rgs, api, extraOptions) => {
     api,
     extraOptions,
   );
-  console.log(refreshResult);
+
   if (!refreshResult.data.access) {
     return forceLogout();
   }

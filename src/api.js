@@ -1,5 +1,6 @@
+// /* eslint-disable */
 export const baseURL = 'https://skypro-music-api.skyeng.tech';
-/* eslint-disable */
+
 export async function getPlaylistId(id) {
   const response = await fetch(`${baseURL}/catalog/track/${id}`);
 

@@ -1,4 +1,4 @@
-/* eslint-disable */
+// /* eslint-disable */
 import { useParams } from 'react-router-dom';
 import { Footer } from '../../components/footer/Footer';
 import GlobalStyle, { Wrapper, Container } from '../../styles';

@@ -10,11 +10,13 @@ import {
 } from './styles';
 import { logOut } from '../../App';
 import { selectTrackFunction } from '../../../store/sliceSelectTrack';
+import { useGetPlaylistAllQuery } from '../../../services/playlistApi';
 
 export const Sidebar = () => {
   let userName = useSelector((state) => state.userName.userName);
   const dispatch = useDispatch();
-  const { status } = useSelector((state) => state.playlist);
+
+  const {isLoading} = useGetPlaylistAllQuery()
 
   if (userName) {
     const index = userName.lastIndexOf('@');
@@ -39,7 +41,7 @@ export const Sidebar = () => {
         <SidebarList>
           <SidebarItem
             playlist={
-              status === 'loading'
+              isLoading
                 ? '/music/img/playlist00.png'
                 : '/music/img/playlist01.png'
             }
@@ -47,7 +49,7 @@ export const Sidebar = () => {
           />
           <SidebarItem
             playlist={
-              status === 'loading'
+              isLoading
                 ? '/music/img/playlist00.png'
                 : '/music/img/playlist02.png'
             }
@@ -55,7 +57,7 @@ export const Sidebar = () => {
           />
           <SidebarItem
             playlist={
-              status === 'loading'
+              isLoading
                 ? '/music/img/playlist00.png'
                 : '/music/img/playlist03.png'
             }
