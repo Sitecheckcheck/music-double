@@ -4,46 +4,52 @@ import { useState } from 'react';
 import * as S from './playliststyle';
 import { selectTrackFunction } from '../../../../store/sliceSelectTrack';
 import { useIsPlayingContext } from '../../../../hooks/IsPlaying';
-import { addFavorite, deleteFavorite } from '../../../../api';
-import { fetchFavoritePlaylist } from '../../../../store/sliceFavoritePlaylist';
-import { fetchPlaylist } from '../../../../store/slicePlaylist';
+import { useAddFavoriteMutation } from '../../../../services/playlistApi';
+import { useDeleteFavoriteMutation } from '../../../../services/playlistApi';
+// import { addFavorite, deleteFavorite } from '../../../../api';
+// import { fetchFavoritePlaylist } from '../../../../store/sliceFavoritePlaylist';
+// import { fetchPlaylist } from '../../../../store/slicePlaylist';
 
 export const PlaylistItem = (props) => {
+
+  const [addFavorite, { }] = useAddFavoriteMutation()
+  const [deleteFavorite, { }] = useDeleteFavoriteMutation()
+  
   const userName = useSelector((state) => state.userName.userName);
   const stared = props.item.stared_user
-    ? props.item.stared_user.find((element) => element.email === userName)
+    ? props.item.stared_user.find((element) => element.username === userName)
     : false;
   const dispatch = useDispatch();
   const selectTrack = useSelector((state) => state.selectTrack.selectTrack);
   const isPlayingContext = useIsPlayingContext();
   const { isPlaying } = isPlayingContext;
   const [isLike, setIsLike] = useState(stared);
-
+  
   const handleLike = async () => {
     const accessToken = localStorage.getItem('access');
 
-    const getNewPL = async () => {
-      const NewPlaylist = await dispatch(fetchPlaylist());
-      dispatch(fetchFavoritePlaylist());
-      if (selectTrack && props.item.id === selectTrack.id) {
-        dispatch(
-          selectTrackFunction(
-            NewPlaylist.payload.filter((x) => x.id === props.item.id)[0],
-          ),
-        );
-      }
-    };
+    // const getNewPL = async () => {
+    //   const NewPlaylist = await dispatch(fetchPlaylist());
+    //   dispatch(fetchFavoritePlaylist());
+    //   if (selectTrack && props.item.id === selectTrack.id) {
+    //     dispatch(
+    //       selectTrackFunction(
+    //         NewPlaylist.payload.filter((x) => x.id === props.item.id)[0],
+    //       ),
+    //     );
+    //   }
+    // };
 
     if (isLike) {
       await deleteFavorite(props.item.id, accessToken);
 
-      getNewPL();
+      // getNewPL();
 
       setIsLike(null);
     } else {
       await addFavorite(props.item.id, accessToken);
 
-      getNewPL();
+      // getNewPL();
 
       setIsLike(true);
     }
@@ -92,7 +98,7 @@ export const PlaylistItem = (props) => {
               handleLike();
             }}
           >
-            {isLike ? (
+            {stared ? (
               <img
                 src="/music/img/like.svg"
                 className="track__time-svg"

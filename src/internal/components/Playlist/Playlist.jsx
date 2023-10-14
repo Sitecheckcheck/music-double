@@ -112,7 +112,8 @@ export const Playlist = ({ list, status, error, setPlaylist, listName }) => {
               <PlaylistItem
                 list={currentPlaylist}
                 setPlaylist={setPlaylist}
-                item={list.filter((x) => x.id === item.id)[0]}
+                // item={list.filter((x) => x.id === item.id)[0]}
+                item={item}
                 key={item.id}
                 track={item.name}
                 artist={item.author}

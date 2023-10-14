@@ -1,4 +1,4 @@
-// /* eslint-disable */
+/* eslint-disable */
 import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,16 +8,16 @@ import SMain from '../main/mainStyle';
 import { MyTracksCenterBlock } from './mytrackcenterblock';
 import { logOut } from '../../App';
 import { selectTrackFunction } from '../../../store/sliceSelectTrack';
-import { fetchFavoritePlaylist } from '../../../store/sliceFavoritePlaylist';
+// import { fetchFavoritePlaylist } from '../../../store/sliceFavoritePlaylist';
 
 export const MyTrackMain = ({ setPlaylist }) => {
   let userName = useSelector((state) => state.userName.userName);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchFavoritePlaylist());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchFavoritePlaylist());
+  // }, [dispatch]);
 
   if (userName) {
     const index = userName.lastIndexOf('@');

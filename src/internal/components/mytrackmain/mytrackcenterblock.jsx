@@ -1,19 +1,27 @@
 // /* eslint-disable */
-import { useSelector } from 'react-redux';
 import * as S from '../centerblock/centerBlockStyle';
 import { Playlist } from '../Playlist/Playlist';
+import { useGetPlaylistFavoriteQuery } from '../../../services/playlistApi';
+// import { refreshingToken } from '../../../api';
 
 export const MyTracksCenterBlock = ({ setPlaylist }) => {
-  const { favoritePlaylist, status, error } = useSelector(
-    (state) => state.favoritePlaylist,
-  );
+
+  const { data = [], error, isLoading } = useGetPlaylistFavoriteQuery();
+
+  // if (error && error.status === 401) {
+  //   const refteshToken = localStorage.getItem('refresh');
+  //   refreshingToken(refteshToken).then((response) => {
+  //     localStorage.setItem('access', response.access);
+  //   });
+  // }
+
 
   return (
     <S.MainCenterblock>
       <Playlist
-        status={status}
+        status={isLoading ? 'loading' : 'resolved'}
         error={error}
-        list={favoritePlaylist}
+        list={data}
         setPlaylist={setPlaylist}
         listName="Мои треки"
       />

@@ -5,9 +5,11 @@ import * as S from './barStyle';
 import { ProgressBar } from './ProgressBar';
 import { useIsPlayingContext } from '../../../hooks/IsPlaying';
 import { selectTrackFunction } from '../../../store/sliceSelectTrack';
-import { fetchPlaylist } from '../../../store/slicePlaylist';
-import { addFavorite, deleteFavorite } from '../../../api';
-import { fetchFavoritePlaylist } from '../../../store/sliceFavoritePlaylist';
+// import { fetchPlaylist } from '../../../store/slicePlaylist';
+// import { addFavorite, deleteFavorite } from '../../../api';
+// import { fetchFavoritePlaylist } from '../../../store/sliceFavoritePlaylist';
+import { useAddFavoriteMutation } from '../../../services/playlistApi';
+import { useDeleteFavoriteMutation } from '../../../services/playlistApi';
 
 export const BarPlayer = ({
   isLoadTrack,
@@ -29,6 +31,8 @@ export const BarPlayer = ({
   const dispatch = useDispatch();
   const [firstPlaylist] = useState(playlist);
   const userName = useSelector((state) => state.userName.userName);
+  const [addFavorite, { }] = useAddFavoriteMutation()
+  const [deleteFavorite, { }] = useDeleteFavoriteMutation()
 
   const stared = selectTrack.stared_user
     ? selectTrack.stared_user.find((element) => element.email === userName)
@@ -44,13 +48,13 @@ export const BarPlayer = ({
     const accessToken = localStorage.getItem('access');
     if (isLike) {
       await deleteFavorite(selectTrack.id, accessToken);
-      dispatch(fetchPlaylist());
-      dispatch(fetchFavoritePlaylist());
+      // dispatch(fetchPlaylist());
+      // dispatch(fetchFavoritePlaylist());
       setIsLike(null);
     } else {
       await addFavorite(selectTrack.id, accessToken);
-      dispatch(fetchPlaylist());
-      dispatch(fetchFavoritePlaylist());
+      // dispatch(fetchPlaylist());
+      // dispatch(fetchFavoritePlaylist());
       setIsLike(true);
     }
   };

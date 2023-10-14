@@ -1,25 +1,26 @@
-// /* eslint-disable */
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+/* eslint-disable */
 import * as S from './centerBlockStyle';
 import { Playlist } from '../Playlist/Playlist';
-import { fetchPlaylist } from '../../../store/slicePlaylist';
+import { useGetPlaylistAllQuery } from '../../../services/playlistApi';
+// import { refreshingToken } from '../../../api';
 
 export const CenterBlock = ({ setPlaylist }) => {
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchPlaylist());
-  }, [dispatch]);
+  const {data = [], isLoading, error } = useGetPlaylistAllQuery()
 
-  const { playlist, status, error } = useSelector((state) => state.playlist);
+  // if (error && error.status === 401) {
+  //   const refteshToken = localStorage.getItem('refresh');
+  //   refreshingToken(refteshToken).then((response) => {
+  //     localStorage.setItem('access', response.access);
+  //   });
+  // }
   
   return (
     <S.MainCenterblock>
       <Playlist
-        status={status}
+        status={isLoading ? 'loading' : 'resolved'}
         error={error}
-        list={playlist}
+        list={data}
         setPlaylist={setPlaylist}
         listName="Треки"
       />

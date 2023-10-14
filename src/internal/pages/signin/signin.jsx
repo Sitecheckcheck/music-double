@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -19,8 +20,8 @@ export const Signin = () => {
     try {
       setDisabled(true);
       const user = await authUser(login, password);
-      localStorage.setItem('user', user.username);
       const token = await getToken(login, password);
+      localStorage.setItem('user', user.username);
       localStorage.setItem('refresh', token.refresh);
       localStorage.setItem('access', token.access);
 

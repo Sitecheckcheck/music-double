@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { useGetSelectionPlaylistQuery } from '../../../services/selectionPlaylistApi';
+import { useGetPlaylistSelectionQuery } from '../../../services/playlistApi';
 import { Playlist } from '../Playlist/Playlist';
 import * as S from '../centerblock/centerBlockStyle';
 
@@ -9,7 +9,7 @@ export const ListCenterBlock = ({ ListName, setPlaylist }) => {
     data = [],
     error,
     isLoading,
-  } = useGetSelectionPlaylistQuery(ListName.id);
+  } = useGetPlaylistSelectionQuery(ListName.id);
 
   return (
     <S.MainCenterblock>
